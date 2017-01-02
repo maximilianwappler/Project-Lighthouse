@@ -25,6 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Look for Savedata and insert the Data into the screen
         FileInputStream in = null;
         try {
             in = openFileInput("project_lighthouse_savedata");
@@ -54,16 +55,16 @@ public class SettingsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Diese Funktion ist noch nicht verfügbar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
 
+    // Save the inserted IP-adress in savedata
     public void saveIP (View view){
         String FILENAME = "project_lighthouse_savedata";
         String string = ((TextView) findViewById(R.id.editIP)).getText().toString();
-
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
@@ -81,8 +82,7 @@ public class SettingsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         ((TextView) findViewById(R.id.feebackTextSave)).setText("Änderungen gespeichert");
-
+        //Back to MainActivity
         finish();
     }
-
 }

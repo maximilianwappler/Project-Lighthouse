@@ -27,7 +27,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
     testCompile 'junit:junit:4.12'
-    compile 'javax.websocket:javax.websocket-all:1.1'
     compile 'javax.websocket:javax.websocket-client-api:1.1'
     compile 'org.glassfish.tyrus.bundles:tyrus-standalone-client:1.13'
 }

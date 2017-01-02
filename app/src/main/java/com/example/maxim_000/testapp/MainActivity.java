@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
     boolean checked;
+    StringBuilder sb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +28,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        sb = new StringBuilder();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Diese Funktion ist noch nicht verfügbar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //open the Settings activity
             openSettings();
             return true;
         }
@@ -67,15 +70,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /** Called when the user clicks at one of the checkboxes */
     public void onCheckboxClicked(View view) {
 
+        // Check for savedata and load it
+        loadSavedata();
+
+        // Perform action for clicked Checkbox
+        performAction(view);
+    }
+
+    public void loadSavedata() {
+        // Check for savedata and load it
         FileInputStream in = null;
         try {
             in = openFileInput("project_lighthouse_savedata");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        StringBuilder sb = new StringBuilder();
+        sb = new StringBuilder();
         String line;
         if (in != null){
             InputStreamReader inputStreamReader = new InputStreamReader(in);
@@ -88,11 +101,12 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
 
-
+    public void performAction(View view){
         // Is the view now checked?
         checked = ((CheckBox) view).isChecked();
-        // Check which checkbox was clicked
+        // Check which checkbox was clicked and perform action
         switch(view.getId()) {
             case R.id.checkBox1:
                 if (checked) {
